@@ -278,7 +278,7 @@
         /* --- Crew Grid (Bottom Credits) --- */
         .crew-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
             width: 100%;
         }
@@ -312,6 +312,21 @@
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--text-main);
+            margin-bottom: 0.75rem;
+        }
+
+        .crew-link {
+            display: inline-block;
+            font-size: 0.8rem;
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .crew-link:hover {
+            color: var(--ocean-blue-hover);
+            text-decoration: underline;
         }
 
         /* --- Wiki Modal Overlay --- */
@@ -474,40 +489,26 @@
         <!-- The Crew / Credits Section at Bottom -->
         <section id="team">
             <h2 class="section-title">The Crew Credits</h2>
-            <p class="section-desc">The key leadership and development departments behind Eternal Tides.</p>
+            <p class="section-desc">The leadership core steering Eternal Tides.</p>
             
             <div class="crew-grid">
                 <div class="crew-card">
                     <div class="crew-role">Server Owner</div>
-                    <div class="crew-name">@IMU</div>
+                    <div class="crew-name">Darcofv</div>
+                    <a href="https://www.youtube.com/@darcofv" target="_blank" class="crew-link">YouTube Channel →</a>
                 </div>
                 <div class="crew-card">
                     <div class="crew-role">Co-Owner</div>
-                    <div class="crew-name">@FiveElders</div>
+                    <div class="crew-name">zorbenn</div>
+                    <a href="https://www.youtube.com/@zorbenn" target="_blank" class="crew-link">YouTube Channel →</a>
                 </div>
                 <div class="crew-card">
                     <div class="crew-role">Executive Manager</div>
-                    <div class="crew-name">@SupremeCommander</div>
+                    <div class="crew-name">@mando</div>
                 </div>
                 <div class="crew-card">
-                    <div class="crew-role">Development Director</div>
-                    <div class="crew-name">@ChiefShipwright</div>
-                </div>
-                <div class="crew-card">
-                    <div class="crew-role">Lead Developer</div>
-                    <div class="crew-name">@LeadDeveloper</div>
-                </div>
-                <div class="crew-card">
-                    <div class="crew-role">Head Administrator</div>
-                    <div class="crew-name">@WorldGovernment</div>
-                </div>
-                <div class="crew-card">
-                    <div class="crew-role">Head Moderator</div>
-                    <div class="crew-name">@FleetAdmiral</div>
-                </div>
-                <div class="crew-card">
-                    <div class="crew-role">Community Manager</div>
-                    <div class="crew-name">@Community</div>
+                    <div class="crew-role">Development Department</div>
+                    <div class="crew-name">TBD</div>
                 </div>
             </div>
         </section>
