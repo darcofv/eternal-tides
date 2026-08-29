@@ -1,1191 +1,1822 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>ETERNAL TIDES | Roblox</title>
-
-    <meta name="description" content="ETERNAL TIDES — An open-world pirate adventure on Roblox.">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #050b14;
-            color: #f4f0df;
-            overflow-x: hidden;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 72px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 6%;
-            background: rgba(3, 8, 15, 0.75);
-            backdrop-filter: blur(14px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            z-index: 1000;
-        }
-
-        .logo {
-            font-size: 21px;
-            font-weight: 900;
-            letter-spacing: 3px;
-            color: #f0d58a;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #c7ced8;
-            font-size: 13px;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #62d9ff;
-        }
-
-        .nav-button {
-            padding: 11px 18px;
-            border: 1px solid #f0d58a;
-            color: #f0d58a !important;
-            border-radius: 4px;
-        }
-
-        .nav-button:hover {
-            background: #f0d58a;
-            color: #050b14 !important;
-        }
-
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 100px 20px 60px;
-            position: relative;
-            overflow: hidden;
-
-            background:
-                radial-gradient(circle at 50% 45%, rgba(0, 180, 255, 0.18), transparent 35%),
-                linear-gradient(180deg, #07182a 0%, #06101c 55%, #050b14 100%);
-        }
-
-        .hero::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(rgba(5,11,20,0.15), rgba(5,11,20,0.8)),
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 4px,
-                    rgba(255,255,255,0.015) 5px
-                );
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            max-width: 900px;
-            z-index: 2;
-        }
-
-        .eyebrow {
-            color: #62d9ff;
-            letter-spacing: 5px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 22px;
-        }
-
-        .hero h1 {
-            font-size: clamp(55px, 10vw, 120px);
-            letter-spacing: 8px;
-            font-weight: 900;
-            color: #f0d58a;
-            text-shadow:
-                0 0 35px rgba(240,213,138,0.15),
-                0 8px 30px rgba(0,0,0,0.5);
-        }
-
-        .hero h2 {
-            margin-top: 5px;
-            font-size: clamp(17px, 3vw, 27px);
-            letter-spacing: 7px;
-            color: #ffffff;
-        }
-
-        .hero p {
-            max-width: 650px;
-            margin: 28px auto;
-            line-height: 1.8;
-            color: #aeb9c8;
-            font-size: 16px;
-        }
-
-        .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 15px 27px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            transition: 0.3s;
-        }
-
-        .primary {
-            background: #f0d58a;
-            color: #07101b;
-        }
-
-        .primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(240,213,138,0.2);
-        }
-
-        .secondary {
-            border: 1px solid rgba(255,255,255,0.25);
-            color: white;
-            background: rgba(255,255,255,0.04);
-        }
-
-        .secondary:hover {
-            border-color: #62d9ff;
-            color: #62d9ff;
-            transform: translateY(-3px);
-        }
-
-        .scroll {
-            position: absolute;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            color: #657386;
-            font-size: 10px;
-            letter-spacing: 3px;
-        }
-
-        section {
-            padding: 100px 7%;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 55px;
-        }
-
-        .section-title span {
-            color: #62d9ff;
-            font-size: 11px;
-            letter-spacing: 4px;
-            font-weight: bold;
-        }
-
-        .section-title h2 {
-            font-size: clamp(30px, 5vw, 48px);
-            margin-top: 12px;
-            color: #f0f0e8;
-        }
-
-        .section-title p {
-            max-width: 650px;
-            margin: 15px auto 0;
-            color: #8290a1;
-            line-height: 1.7;
-        }
-
-        .status {
-            background: #07111d;
-        }
-
-        .status-grid {
-            max-width: 1000px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            border: 1px solid rgba(255,255,255,0.08);
-            background: rgba(255,255,255,0.02);
-        }
-
-        .status-card {
-            padding: 30px 20px;
-            text-align: center;
-            border-right: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .status-card:last-child {
-            border-right: none;
-        }
-
-        .status-card small {
-            display: block;
-            color: #687688;
-            font-size: 10px;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
-        }
-
-        .status-card strong {
-            font-size: 18px;
-        }
-
-        .active {
-            color: #55e69a;
-        }
-
-        .features {
-            background: #050b14;
-        }
-
-        .feature-grid {
-            max-width: 1100px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .feature {
-            min-height: 210px;
-            padding: 30px;
-            background: linear-gradient(145deg, #0b1725, #07101b);
-            border: 1px solid rgba(255,255,255,0.07);
-            transition: 0.3s;
-        }
-
-        .feature:hover {
-            transform: translateY(-6px);
-            border-color: rgba(98,217,255,0.35);
-        }
-
-        .feature-icon {
-            font-size: 30px;
-            margin-bottom: 25px;
-        }
-
-        .feature h3 {
-            margin-bottom: 10px;
-            color: #f0d58a;
-        }
-
-        .feature p {
-            color: #7f8b9b;
-            line-height: 1.6;
-            font-size: 14px;
-        }
-
-        .development {
-            background: #07111d;
-        }
-
-        .progress-container {
-            max-width: 850px;
-            margin: auto;
-        }
-
-        .progress-item {
-            margin-bottom: 30px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 9px;
-            color: #d9dde3;
-            font-size: 13px;
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: #101d2c;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #2189b4, #62d9ff);
-            border-radius: 20px;
-        }
-
-        .updates {
-            background: #050b14;
-        }
-
-        .update-grid {
-            max-width: 1100px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .update {
-            padding: 30px;
-            background: #091522;
-            border: 1px solid rgba(255,255,255,0.07);
-        }
-
-        .update-version {
-            color: #62d9ff;
-            font-size: 11px;
-            letter-spacing: 2px;
-        }
-
-        .update h3 {
-            margin: 13px 0;
-            font-size: 21px;
-        }
-
-        .update p {
-            color: #7d8998;
-            line-height: 1.7;
-            font-size: 14px;
-        }
-
-        .update ul {
-            margin-top: 20px;
-            padding-left: 18px;
-            color: #a8b1bd;
-            line-height: 2;
-            font-size: 13px;
-        }
-
-        .media {
-            background: #07111d;
-        }
-
-        .media-grid {
-            max-width: 1100px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .media-card {
-            min-height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background:
-                linear-gradient(135deg, rgba(30,120,160,0.25), rgba(5,15,25,0.95));
-            border: 1px solid rgba(255,255,255,0.08);
-            color: #667587;
-            letter-spacing: 2px;
-            font-size: 11px;
-            transition: 0.3s;
-        }
-
-        .media-card:hover {
-            border-color: #62d9ff;
-            color: #62d9ff;
-        }
-
-        .team {
-            background: #050b14;
-        }
-
-        .team-grid {
-            max-width: 1000px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
-
-        .member {
-            padding: 30px 20px;
-            text-align: center;
-            background: #091522;
-            border: 1px solid rgba(255,255,255,0.07);
-        }
-
-        .avatar {
-            width: 75px;
-            height: 75px;
-            margin: 0 auto 20px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, #0c3548, #07111d);
-            border: 1px solid rgba(98,217,255,0.3);
-            font-size: 25px;
-        }
-
-        .member h3 {
-            font-size: 15px;
-            margin-bottom: 8px;
-        }
-
-        .member p {
-            color: #62d9ff;
-            font-size: 10px;
-            letter-spacing: 1px;
-        }
-
-        .apply {
-            background:
-                radial-gradient(circle at center, rgba(0,120,170,0.12), transparent 45%),
-                #07111d;
-            text-align: center;
-        }
-
-        .apply-box {
-            max-width: 800px;
-            margin: auto;
-            padding: 60px 30px;
-            border: 1px solid rgba(98,217,255,0.15);
-            background: rgba(255,255,255,0.02);
-        }
-
-        .apply-box h2 {
-            font-size: clamp(30px, 5vw, 50px);
-            color: #f0d58a;
-            margin-bottom: 15px;
-        }
-
-        .apply-box p {
-            color: #8995a5;
-            line-height: 1.7;
-            max-width: 600px;
-            margin: auto;
-        }
-
-        .roles {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 10px;
-            margin: 30px 0;
-        }
-
-        .role {
-            padding: 10px 15px;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #b5beca;
-            font-size: 11px;
-        }
-
-        .faq {
-            background: #050b14;
-        }
-
-        .faq-container {
-            max-width: 850px;
-            margin: auto;
-        }
-
-        details {
-            background: #091522;
-            border: 1px solid rgba(255,255,255,0.07);
-            margin-bottom: 10px;
-            padding: 20px;
-        }
-
-        summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: #dce1e7;
-        }
-
-        details p {
-            color: #7f8c9c;
-            margin-top: 15px;
-            line-height: 1.7;
-            font-size: 14px;
-        }
-
-        .community {
-            text-align: center;
-            background: linear-gradient(180deg, #07111d, #03070d);
-        }
-
-        .socials {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 30px;
-        }
-
-        .social {
-            padding: 13px 25px;
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #aab4c0;
-            font-size: 11px;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .social:hover {
-            color: #62d9ff;
-            border-color: #62d9ff;
-        }
-
-        footer {
-            padding: 35px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top: 1px solid rgba(255,255,255,0.07);
-            background: #03070d;
-            color: #536171;
-            font-size: 11px;
-        }
-
-        footer strong {
-            color: #f0d58a;
-            letter-spacing: 2px;
-        }
-
-        @media (max-width: 850px) {
-
-            .nav-links {
-                display: none;
-            }
-
-            .status-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .status-card:nth-child(2) {
-                border-right: none;
-            }
-
-            .feature-grid,
-            .update-grid,
-            .media-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .team-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .hero h1 {
-                letter-spacing: 4px;
-            }
-        }
-
-        @media (max-width: 500px) {
-
-            section {
-                padding: 75px 5%;
-            }
-
-            .team-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .status-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .status-card {
-                border-right: none;
-                border-bottom: 1px solid rgba(255,255,255,0.08);
-            }
-
-            .status-card:last-child {
-                border-bottom: none;
-            }
-
-            footer {
-                flex-direction: column;
-                gap: 15px;
-                text-align: center;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>ETERNAL TIDES | Official</title>
+
+<meta name="description" content="ETERNAL TIDES — An open-world pirate adventure currently in development.">
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: #03080f;
+    color: #eee8d5;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 6%;
+
+    background: rgba(2,7,13,.88);
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid rgba(224,190,101,.15);
+
+    z-index: 1000;
+}
+
+.logo {
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    letter-spacing: 4px;
+    color: #e6c76b;
+    font-size: 20px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+}
+
+.nav-links a {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #aeb7c2;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: #e6c76b;
+}
+
+.nav-button {
+    padding: 11px 18px;
+    border: 1px solid #e6c76b;
+    color: #e6c76b;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.nav-button:hover {
+    background: #e6c76b;
+    color: #03080f;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    min-height: 100vh;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 120px 20px 80px;
+
+    background:
+        radial-gradient(circle at 50% 40%, rgba(0,145,190,.22), transparent 32%),
+        radial-gradient(circle at 20% 70%, rgba(12,66,87,.35), transparent 30%),
+        linear-gradient(#061525,#02070d);
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            rgba(2,7,13,.05),
+            rgba(2,7,13,.9)
+        ),
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 5px,
+            rgba(255,255,255,.012) 6px
+        );
+
+    pointer-events: none;
+}
+
+/* Ocean glow */
+
+.hero::after {
+    content: "";
+    position: absolute;
+
+    bottom: -120px;
+    left: -10%;
+
+    width: 120%;
+    height: 220px;
+
+    background: #061c2c;
+
+    border-radius: 50% 50% 0 0;
+
+    box-shadow:
+        0 -20px 60px rgba(0,180,230,.15);
+
+    opacity: .8;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 950px;
+}
+
+.eyebrow {
+    font-size: 11px;
+    letter-spacing: 6px;
+    font-weight: 800;
+
+    color: #55d7ff;
+
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    font-family: 'Cinzel', serif;
+
+    font-size: clamp(55px, 11vw, 125px);
+
+    letter-spacing: 8px;
+
+    line-height: .95;
+
+    color: #e6c76b;
+
+    text-shadow:
+        0 0 35px rgba(230,199,107,.15),
+        0 15px 40px rgba(0,0,0,.7);
+}
+
+.hero h2 {
+    font-family: 'Cinzel', serif;
+
+    margin-top: 8px;
+
+    font-size: clamp(18px, 3vw, 30px);
+
+    letter-spacing: 12px;
+
+    color: #f4f0df;
+}
+
+.hero p {
+    max-width: 650px;
+
+    margin: 30px auto;
+
+    color: #9caaba;
+
+    line-height: 1.8;
+
+    font-size: 15px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+
+    margin-top: 30px;
+}
+
+.button {
+    display: inline-block;
+
+    padding: 15px 28px;
+
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 2px;
+
+    transition: .3s;
+}
+
+.primary {
+    background: #e6c76b;
+    color: #050b12;
+}
+
+.primary:hover {
+    transform: translateY(-4px);
+
+    box-shadow:
+        0 12px 35px rgba(230,199,107,.2);
+}
+
+.secondary {
+    border: 1px solid rgba(255,255,255,.25);
+    background: rgba(255,255,255,.03);
+
+    color: white;
+}
+
+.secondary:hover {
+    border-color: #55d7ff;
+    color: #55d7ff;
+
+    transform: translateY(-4px);
+}
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 35px;
+
+    padding: 9px 15px;
+
+    border: 1px solid rgba(255,193,75,.25);
+
+    background: rgba(255,193,75,.05);
+
+    color: #d9b967;
+
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.status-dot {
+    width: 7px;
+    height: 7px;
+
+    background: #f0b74c;
+
+    border-radius: 50%;
+
+    box-shadow: 0 0 10px #f0b74c;
+}
+
+/* =========================
+   SECTIONS
+========================= */
+
+section {
+    padding: 105px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-title span {
+    color: #55d7ff;
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    font-weight: 900;
+}
+
+.section-title h2 {
+    font-family: 'Cinzel', serif;
+
+    margin-top: 12px;
+
+    font-size: clamp(30px,5vw,48px);
+
+    color: #eee8d5;
+}
+
+.section-title p {
+    max-width: 650px;
+
+    margin: 15px auto;
+
+    color: #7e8c9c;
+
+    line-height: 1.8;
+}
+
+/* =========================
+   GAME STATUS
+========================= */
+
+.status {
+    background: #06101a;
+
+    border-top: 1px solid rgba(255,255,255,.05);
+    border-bottom: 1px solid rgba(255,255,255,.05);
+}
+
+.status-grid {
+    max-width: 1050px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    border: 1px solid rgba(255,255,255,.08);
+}
+
+.status-card {
+    padding: 32px 20px;
+
+    text-align: center;
+
+    border-right: 1px solid rgba(255,255,255,.08);
+}
+
+.status-card:last-child {
+    border-right: none;
+}
+
+.status-card small {
+    display: block;
+
+    color: #596979;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 10px;
+}
+
+.status-card strong {
+    font-size: 15px;
+
+    color: #ddd8c8;
+}
+
+.development-status {
+    color: #e5b85c !important;
+}
+
+/* =========================
+   FEATURES
+========================= */
+
+.features {
+    background:
+        radial-gradient(circle at 50% 50%, rgba(0,110,150,.08), transparent 45%),
+        #03080f;
+}
+
+.feature-grid {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 18px;
+}
+
+.feature {
+    min-height: 220px;
+
+    padding: 32px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0a1825,
+            #050d16
+        );
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    position: relative;
+
+    overflow: hidden;
+
+    transition: .35s;
+}
+
+.feature::before {
+    content: "✦";
+
+    position: absolute;
+
+    right: 18px;
+    top: 10px;
+
+    color: rgba(230,199,107,.08);
+
+    font-size: 60px;
+}
+
+.feature:hover {
+    transform: translateY(-7px);
+
+    border-color: rgba(85,215,255,.3);
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.3);
+}
+
+.feature-icon {
+    font-size: 29px;
+
+    margin-bottom: 25px;
+}
+
+.feature h3 {
+    font-family: 'Cinzel',serif;
+
+    color: #e6c76b;
+
+    margin-bottom: 12px;
+}
+
+.feature p {
+    color: #7e8b9a;
+
+    line-height: 1.7;
+
+    font-size: 13px;
+}
+
+/* =========================
+   PROGRESS
+========================= */
+
+.development {
+    background: #06101a;
+}
+
+.progress-container {
+    max-width: 850px;
+
+    margin: auto;
+}
+
+.progress-item {
+    margin-bottom: 27px;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 9px;
+
+    color: #cbd1d8;
+
+    font-size: 12px;
+}
+
+.progress-bar {
+    height: 7px;
+
+    background: #101d29;
+
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #166582,
+            #55d7ff
+        );
+}
+
+/* =========================
+   UPDATES
+========================= */
+
+.updates {
+    background: #03080f;
+}
+
+.update-grid {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(3,1fr);
+
+    gap: 18px;
+}
+
+.update {
+    padding: 30px;
+
+    background: #081521;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    transition: .3s;
+}
+
+.update:hover {
+    border-color: rgba(230,199,107,.25);
+}
+
+.update-version {
+    color: #55d7ff;
+
+    font-size: 9px;
+
+    letter-spacing: 3px;
+}
+
+.update h3 {
+    font-family: 'Cinzel',serif;
+
+    margin: 14px 0;
+
+    color: #e6c76b;
+}
+
+.update p {
+    color: #7f8c9b;
+
+    line-height: 1.7;
+
+    font-size: 13px;
+}
+
+.update ul {
+    margin-top: 18px;
+
+    padding-left: 18px;
+
+    color: #aab3be;
+
+    line-height: 2;
+
+    font-size: 12px;
+}
+
+/* =========================
+   TEAM
+========================= */
+
+.team {
+    background: #06101a;
+}
+
+.team-grid {
+    max-width: 1000px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: repeat(4,1fr);
+
+    gap: 17px;
+}
+
+.member {
+    padding: 30px 20px;
+
+    text-align: center;
+
+    background: #081521;
+
+    border: 1px solid rgba(255,255,255,.07);
+
+    transition: .3s;
+}
+
+.member:hover {
+    transform: translateY(-5px);
+
+    border-color: rgba(230,199,107,.3);
+}
+
+.avatar {
+    width: 76px;
+    height: 76px;
+
+    margin: 0 auto 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(circle,#123c50,#06111c);
+
+    border: 1px solid rgba(85,215,255,.25);
+
+    font-size: 25px;
+}
+
+.member h3 {
+    font-size: 14px;
+
+    margin-bottom: 8px;
+}
+
+.member p {
+    color: #55d7ff;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+}
+
+/* =========================
+   APPLICATION
+========================= */
+
+.apply {
+    background:
+        radial-gradient(circle at center,rgba(0,130,175,.13),transparent 45%),
+        #03080f;
+}
+
+.apply-box {
+    max-width: 850px;
+
+    margin: auto;
+
+    padding: 65px 30px;
+
+    text-align: center;
+
+    border: 1px solid rgba(230,199,107,.16);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            rgba(255,255,255,.01)
+        );
+}
+
+.apply-box h2 {
+    font-family: 'Cinzel',serif;
+
+    font-size: clamp(30px,5vw,50px);
+
+    color: #e6c76b;
+}
+
+/* =========================
+   WIKI
+========================= */
+
+.wiki {
+    background: #06101a;
+}
+
+.wiki-box {
+    max-width: 850px;
+
+    margin: auto;
+
+    min-height: 300px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 50px;
+
+    border: 1px solid rgba(85,215,255,.12);
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(0,130,170,.1),
+            transparent 60%
+        );
+}
+
+.magnifying-glass {
+    font-size: 75px;
+
+    margin-bottom: 20px;
+
+    filter:
+        drop-shadow(
+            0 0 15px rgba(85,215,255,.2)
+        );
+
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+
+    0%,100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.wiki-box h2 {
+    font-family: 'Cinzel',serif;
+
+    font-size: 35px;
+
+    color: #e6c76b;
+
+    margin-bottom: 10px;
+}
+
+.wiki-box p {
+    color: #7e8c9c;
+
+    max-width: 500px;
+
+    line-height: 1.7;
+}
+
+/* =========================
+   COMMUNITY
+========================= */
+
+.community {
+    text-align: center;
+
+    background:
+        linear-gradient(
+            #06101a,
+            #02060b
+        );
+}
+
+.socials {
+    display: flex;
+
+    justify-content: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 30px;
+}
+
+.social {
+    padding: 14px 28px;
+
+    border: 1px solid rgba(255,255,255,.1);
+
+    color: #b1bbc6;
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: 800;
+
+    transition: .3s;
+}
+
+.social:hover {
+    color: #55d7ff;
+
+    border-color: #55d7ff;
+
+    transform: translateY(-3px);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    padding: 35px 7%;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-top: 1px solid rgba(255,255,255,.06);
+
+    background: #02060b;
+
+    color: #4f5d6d;
+
+    font-size: 10px;
+}
+
+footer strong {
+    font-family: 'Cinzel',serif;
+
+    color: #e6c76b;
+
+    letter-spacing: 2px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:850px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .status-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+    .status-card:nth-child(2) {
+        border-right: none;
+    }
+
+    .feature-grid,
+    .update-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .team-grid {
+        grid-template-columns: repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:500px) {
+
+    section {
+        padding: 75px 5%;
+    }
+
+    .hero h1 {
+        letter-spacing: 4px;
+    }
+
+    .hero h2 {
+        letter-spacing: 7px;
+    }
+
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .status-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .status-card {
+        border-right: none;
+
+        border-bottom:
+            1px solid rgba(255,255,255,.08);
+    }
+
+    .status-card:last-child {
+        border-bottom: none;
+    }
+
+    footer {
+        flex-direction: column;
+
+        gap: 15px;
+
+        text-align: center;
+    }
+
+}
+
+</style>
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
+<!-- =========================
+     NAVIGATION
+========================= -->
 
-    <nav>
-        <a href="#" class="logo">ETERNAL TIDES</a>
+<nav>
 
-        <ul class="nav-links">
-            <li><a href="#game">GAME</a></li>
-            <li><a href="#updates">UPDATES</a></li>
-            <li><a href="#media">MEDIA</a></li>
-            <li><a href="#team">TEAM</a></li>
-            <li><a href="#apply">APPLY</a></li>
-        </ul>
+<a href="#" class="logo">
+ETERNAL TIDES
+</a>
 
-        <!-- DISCORD -->
-        <a href="https://discord.gg/dtDfnuKZr7"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="nav-button">
-            DISCORD
-        </a>
-    </nav>
+<ul class="nav-links">
 
+<li>
+<a href="#game">GAME</a>
+</li>
 
-    <!-- HERO -->
+<li>
+<a href="#updates">UPDATES</a>
+</li>
 
-    <header class="hero">
+<li>
+<a href="#wiki">WIKI</a>
+</li>
 
-        <div class="hero-content">
+<li>
+<a href="#team">CREW</a>
+</li>
 
-            <div class="eyebrow">AN OPEN-WORLD PIRATE ADVENTURE</div>
+<li>
+<a href="#apply">APPLY</a>
+</li>
 
-            <h1>ETERNAL</h1>
-            <h2>TIDES</h2>
+</ul>
 
-            <p>
-                Set sail across a world of dangerous seas, powerful abilities,
-                intense combat, mysterious islands and endless adventure.
-            </p>
+<a
+href="https://discord.gg/dtDfnuKZr7"
+target="_blank"
+class="nav-button"
+>
+DISCORD
+</a>
 
-            <div class="buttons">
+</nav>
 
-                <!-- ADD YOUR ROBLOX GAME LINK HERE -->
-                <a href="#" class="button primary">
-                    PLAY ON ROBLOX
-                </a>
 
-                <!-- DISCORD -->
-                <a href="https://discord.gg/dtDfnuKZr7"
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   class="button secondary">
-                    JOIN DISCORD
-                </a>
-
-            </div>
-
-        </div>
-
-        <div class="scroll">
-            SCROLL TO EXPLORE ↓
-        </div>
-
-    </header>
-
-
-    <!-- GAME STATUS -->
-
-    <section class="status" id="game">
-
-        <div class="section-title">
-            <span>THE CURRENT STATE</span>
-            <h2>GAME STATUS</h2>
-        </div>
-
-        <div class="status-grid">
-
-            <div class="status-card">
-                <small>VERSION</small>
-                <strong>0.1.0</strong>
-            </div>
+<!-- =========================
+     HERO
+========================= -->
 
-            <div class="status-card">
-                <small>DEVELOPMENT</small>
-                <strong class="active">● ACTIVE</strong>
-            </div>
-
-            <div class="status-card">
-                <small>PLAYERS</small>
-                <strong>COMING SOON</strong>
-            </div>
-
-            <div class="status-card">
-                <small>PLATFORM</small>
-                <strong>ROBLOX</strong>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- FEATURES -->
-
-    <section class="features">
-
-        <div class="section-title">
-            <span>EXPLORE THE WORLD</span>
-            <h2>WHAT AWAITS YOU</h2>
-            <p>
-                ETERNAL TIDES is being built around exploration, progression,
-                combat and a living pirate world.
-            </p>
-        </div>
-
-        <div class="feature-grid">
-
-            <div class="feature">
-                <div class="feature-icon">⚔️</div>
-                <h3>Fighting Styles</h3>
-                <p>
-                    Master different fighting styles and develop your own
-                    approach to combat.
-                </p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">🏴‍☠️</div>
-                <h3>PvP</h3>
-                <p>
-                    Battle other players and prove yourself across the seas.
-                </p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">🌊</div>
-                <h3>Open World</h3>
-                <p>
-                    Discover islands, secrets and dangerous locations across
-                    a massive ocean.
-                </p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">🚢</div>
-                <h3>Ships</h3>
-                <p>
-                    Take to the ocean and explore the world from the deck of
-                    your own ship.
-                </p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">🗺️</div>
-                <h3>Islands</h3>
-                <p>
-                    Every island can bring new enemies, challenges and
-                    discoveries.
-                </p>
-            </div>
-
-            <div class="feature">
-                <div class="feature-icon">💰</div>
-                <h3>Progression</h3>
-                <p>
-                    Grow stronger, unlock new abilities and continue your
-                    journey across the world.
-                </p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- DEVELOPMENT -->
-
-    <section class="development">
-
-        <div class="section-title">
-            <span>THE JOURNEY</span>
-            <h2>DEVELOPMENT PROGRESSION</h2>
-            <p>
-                A look at where ETERNAL TIDES currently stands.
-            </p>
-        </div>
-
-        <div class="progress-container">
-
-            <div class="progress-item">
-                <div class="progress-header">
-                    <span>Combat System</span>
-                    <span>75%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width:75%"></div>
-                </div>
-            </div>
-
-            <div class="progress-item">
-                <div class="progress-header">
-                    <span>World Building</span>
-                    <span>45%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width:45%"></div>
-                </div>
-            </div>
-
-            <div class="progress-item">
-                <div class="progress-header">
-                    <span>Ships</span>
-                    <span>35%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width:35%"></div>
-                </div>
-            </div>
-
-            <div class="progress-item">
-                <div class="progress-header">
-                    <span>VFX</span>
-                    <span>60%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width:60%"></div>
-                </div>
-            </div>
-
-            <div class="progress-item">
-                <div class="progress-header">
-                    <span>UI</span>
-                    <span>50%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width:50%"></div>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- UPDATES -->
-
-    <section class="updates" id="updates">
-
-        <div class="section-title">
-            <span>DEVELOPMENT LOG</span>
-            <h2>LATEST UPDATES</h2>
-        </div>
-
-        <div class="update-grid">
-
-            <article class="update">
-                <div class="update-version">UPDATE 0.1</div>
-                <h3>THE BEGINNING</h3>
-
-                <p>
-                    Development officially begins on the foundation of
-                    ETERNAL TIDES.
-                </p>
-
-                <ul>
-                    <li>Core combat development</li>
-                    <li>Initial world building</li>
-                    <li>UI foundation</li>
-                    <li>Early VFX</li>
-                </ul>
-            </article>
-
-            <article class="update">
-                <div class="update-version">DEVELOPMENT</div>
-                <h3>COMBAT PROGRESS</h3>
-
-                <p>
-                    Work continues on making combat responsive, exciting
-                    and satisfying.
-                </p>
-
-                <ul>
-                    <li>Fighting styles</li>
-                    <li>Combos</li>
-                    <li>Effects</li>
-                    <li>Animations</li>
-                </ul>
-            </article>
-
-            <article class="update">
-                <div class="update-version">COMING SOON</div>
-                <h3>THE WORLD EXPANDS</h3>
-
-                <p>
-                    New islands and locations are being planned for the
-                    growing world.
-                </p>
-
-                <ul>
-                    <li>New islands</li>
-                    <li>New enemies</li>
-                    <li>New secrets</li>
-                    <li>New adventures</li>
-                </ul>
-            </article>
-
-        </div>
-
-    </section>
-
-
-    <!-- MEDIA -->
-
-    <section class="media" id="media">
-
-        <div class="section-title">
-            <span>FROM THE WORLD OF ETERNAL TIDES</span>
-            <h2>MEDIA</h2>
-            <p>
-                Screenshots, videos, concept art and sneak peeks will appear here.
-            </p>
-        </div>
-
-        <div class="media-grid">
-
-            <div class="media-card">SCREENSHOT</div>
-            <div class="media-card">SNEAK PEEK</div>
-            <div class="media-card">CONCEPT ART</div>
-            <div class="media-card">COMBAT</div>
-            <div class="media-card">ISLANDS</div>
-            <div class="media-card">VFX</div>
-
-        </div>
-
-    </section>
-
-
-    <!-- TEAM -->
-
-    <section class="team" id="team">
-
-        <div class="section-title">
-            <span>THE PEOPLE BEHIND THE GAME</span>
-            <h2>THE CREW</h2>
-            <p>
-                Meet the people helping bring ETERNAL TIDES to life.
-            </p>
-        </div>
-
-        <div class="team-grid">
-
-            <div class="member">
-                <div class="avatar">⚓</div>
-                <h3>@YourName</h3>
-                <p>FOUNDER / LEAD DEVELOPER</p>
-            </div>
-
-            <div class="member">
-                <div class="avatar">💻</div>
-                <h3>@Developer</h3>
-                <p>PROGRAMMER</p>
-            </div>
-
-            <div class="member">
-                <div class="avatar">🏗️</div>
-                <h3>@Builder</h3>
-                <p>BUILDER</p>
-            </div>
-
-            <div class="member">
-                <div class="avatar">✨</div>
-                <h3>@VFXArtist</h3>
-                <p>VFX ARTIST</p>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- APPLICATION -->
-
-    <section class="apply" id="apply">
-
-        <div class="apply-box">
-
-            <div class="section-title">
-                <span>JOIN THE DEVELOPMENT TEAM</span>
-
-                <h2>JOIN THE CREW</h2>
-
-                <p>
-                    We're looking for talented people to help build
-                    ETERNAL TIDES.
-                </p>
-            </div>
-
-            <div class="roles">
-
-                <div class="role">DEVELOPER</div>
-                <div class="role">BUILDER</div>
-                <div class="role">VFX ARTIST</div>
-                <div class="role">UI DESIGNER</div>
-                <div class="role">ANIMATOR</div>
-                <div class="role">TESTER</div>
-                <div class="role">MODERATOR</div>
-
-            </div>
-
-            <!-- YOUR GOOGLE FORM -->
-            <a href="https://forms.gle/VzudkEarJk6CrJjS6"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="button primary">
-                APPLY NOW
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- FAQ -->
-
-    <section class="faq">
-
-        <div class="section-title">
-            <span>QUESTIONS</span>
-            <h2>FAQ</h2>
-        </div>
-
-        <div class="faq-container">
-
-            <details>
-                <summary>When is ETERNAL TIDES releasing?</summary>
-                <p>
-                    ETERNAL TIDES is currently in development. An official
-                    release date will be announced when the game is ready.
-                </p>
-            </details>
-
-            <details>
-                <summary>Will the game be free?</summary>
-                <p>
-                    ETERNAL TIDES is planned to be available on Roblox.
-                </p>
-            </details>
-
-            <details>
-                <summary>Can I become a tester?</summary>
-                <p>
-                    Yes. Tester applications will become available through
-                    the official community.
-                </p>
-            </details>
-
-            <details>
-                <summary>How do I join the Discord?</summary>
-                <p>
-                    Click any Discord button on the website to join the
-                    official ETERNAL TIDES community.
-                </p>
-            </details>
-
-            <details>
-                <summary>Will there be PvP?</summary>
-                <p>
-                    PvP is planned as one of the core features of
-                    ETERNAL TIDES.
-                </p>
-            </details>
-
-        </div>
-
-    </section>
-
-
-    <!-- COMMUNITY -->
-
-    <section class="community">
-
-        <div class="section-title">
-            <span>SAIL WITH US</span>
-
-            <h2>JOIN THE COMMUNITY</h2>
-
-            <p>
-                Follow ETERNAL TIDES and stay up to date with development,
-                sneak peeks and announcements.
-            </p>
-        </div>
-
-        <div class="socials">
-
-            <!-- DISCORD -->
-            <a href="https://discord.gg/dtDfnuKZr7"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="social">
-                DISCORD
-            </a>
-
-            <!-- ROBLOX - ADD YOUR GAME/GROUP LINK -->
-            <a href="#"
-               class="social">
-                ROBLOX
-            </a>
-
-            <!-- YOUTUBE -->
-            <a href="https://www.youtube.com/@EternalTidesGAME"
-               target="_blank"
-               rel="noopener noreferrer"
-               class="social">
-                YOUTUBE
-            </a>
-
-            <!-- TIKTOK - ADD LINK -->
-            <a href="#"
-               class="social">
-                TIKTOK
-            </a>
-
-            <!-- X / TWITTER - ADD LINK -->
-            <a href="#"
-               class="social">
-                X / TWITTER
-            </a>
-
-        </div>
-
-    </section>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div>
-            <strong>ETERNAL TIDES</strong>
-        </div>
-
-        <div>
-            © 2026 ETERNAL TIDES. All rights reserved.
-        </div>
-
-    </footer>
+<header class="hero">
+
+<div class="hero-content">
+
+<div class="eyebrow">
+THE SEA AWAITS
+</div>
+
+<h1>
+ETERNAL
+</h1>
+
+<h2>
+TIDES
+</h2>
+
+<p>
+
+A new open-world pirate adventure is taking shape.
+
+Explore dangerous seas, master powerful fighting styles,
+discover mysterious islands and carve your own legend.
+
+</p>
+
+<div class="buttons">
+
+<a
+href="https://discord.gg/dtDfnuKZr7"
+target="_blank"
+class="button primary"
+>
+JOIN THE CREW
+</a>
+
+<a
+href="#updates"
+class="button secondary"
+>
+EXPLORE DEVELOPMENT
+</a>
+
+</div>
+
+<div class="status-pill">
+
+<span class="status-dot"></span>
+
+GAME CURRENTLY IN DEVELOPMENT
+
+</div>
+
+</div>
+
+</header>
+
+
+<!-- =========================
+     GAME STATUS
+========================= -->
+
+<section class="status" id="game">
+
+<div class="section-title">
+
+<span>
+THE CURRENT VOYAGE
+</span>
+
+<h2>
+GAME STATUS
+</h2>
+
+<p>
+ETERNAL TIDES is currently being developed.
+The game has not been released yet.
+</p>
+
+</div>
+
+<div class="status-grid">
+
+<div class="status-card">
+
+<small>
+VERSION
+</small>
+
+<strong>
+0.1.0
+</strong>
+
+</div>
+
+<div class="status-card">
+
+<small>
+STATUS
+</small>
+
+<strong class="development-status">
+● IN DEVELOPMENT
+</strong>
+
+</div>
+
+<div class="status-card">
+
+<small>
+RELEASE
+</small>
+
+<strong>
+NOT RELEASED
+</strong>
+
+</div>
+
+<div class="status-card">
+
+<small>
+PLATFORM
+</small>
+
+<strong>
+ROBLOX
+</strong>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FEATURES
+========================= -->
+
+<section class="features">
+
+<div class="section-title">
+
+<span>
+THE WORLD OF ETERNAL TIDES
+</span>
+
+<h2>
+WHAT AWAITS
+</h2>
+
+<p>
+Build your strength, explore the unknown and become a name
+that the seas will never forget.
+</p>
+
+</div>
+
+<div class="feature-grid">
+
+<div class="feature">
+
+<div class="feature-icon">
+⚔️
+</div>
+
+<h3>
+Fighting Styles
+</h3>
+
+<p>
+Master unique fighting styles and develop your own approach
+to combat.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+🏴‍☠️
+</div>
+
+<h3>
+PvP
+</h3>
+
+<p>
+Challenge other players and prove that you deserve your
+place among the strongest pirates.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+🌊
+</div>
+
+<h3>
+Open Seas
+</h3>
+
+<p>
+Sail through dangerous waters and uncover what lies beyond
+the horizon.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+🚢
+</div>
+
+<h3>
+Ships
+</h3>
+
+<p>
+Take to the ocean and explore the world from the deck of
+your own vessel.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+🗺️
+</div>
+
+<h3>
+Mystery
+</h3>
+
+<p>
+Discover islands, hidden locations, secrets and stories
+waiting beneath the surface.
+</p>
+
+</div>
+
+
+<div class="feature">
+
+<div class="feature-icon">
+💰
+</div>
+
+<h3>
+Progression
+</h3>
+
+<p>
+Grow stronger, unlock new abilities and continue your
+journey across the world.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     DEVELOPMENT
+========================= -->
+
+<section class="development">
+
+<div class="section-title">
+
+<span>
+THE BUILDING OF A WORLD
+</span>
+
+<h2>
+DEVELOPMENT
+</h2>
+
+<p>
+Follow the progress as ETERNAL TIDES slowly becomes the world
+we've imagined.
+</p>
+
+</div>
+
+<div class="progress-container">
+
+<div class="progress-item">
+
+<div class="progress-header">
+
+<span>
+Combat System
+</span>
+
+<span>
+75%
+</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:75%"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="progress-item">
+
+<div class="progress-header">
+
+<span>
+World Building
+</span>
+
+<span>
+45%
+</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:45%"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="progress-item">
+
+<div class="progress-header">
+
+<span>
+Ships
+</span>
+
+<span>
+35%
+</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:35%"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="progress-item">
+
+<div class="progress-header">
+
+<span>
+VFX
+</span>
+
+<span>
+60%
+</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:60%"
+></div>
+
+</div>
+
+</div>
+
+
+<div class="progress-item">
+
+<div class="progress-header">
+
+<span>
+UI
+</span>
+
+<span>
+50%
+</span>
+
+</div>
+
+<div class="progress-bar">
+
+<div
+class="progress-fill"
+style="width:50%"
+></div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     UPDATES
+========================= -->
+
+<section class="updates" id="updates">
+
+<div class="section-title">
+
+<span>
+CAPTAIN'S LOG
+</span>
+
+<h2>
+LATEST DEVELOPMENT
+</h2>
+
+</div>
+
+<div class="update-grid">
+
+
+<article class="update">
+
+<div class="update-version">
+UPDATE 0.1
+</div>
+
+<h3>
+THE BEGINNING
+</h3>
+
+<p>
+The foundations of ETERNAL TIDES are being built.
+</p>
+
+<ul>
+
+<li>
+Core combat development
+</li>
+
+<li>
+Initial world building
+</li>
+
+<li>
+UI foundation
+</li>
+
+<li>
+Early VFX
+</li>
+
+</ul>
+
+</article>
+
+
+<article class="update">
+
+<div class="update-version">
+COMBAT
+</div>
+
+<h3>
+THE ART OF WAR
+</h3>
+
+<p>
+Combat continues to evolve into a responsive and satisfying
+system.
+</p>
+
+<ul>
+
+<li>
+Fighting styles
+</li>
+
+<li>
+Combos
+</li>
+
+<li>
+Animations
+</li>
+
+<li>
+Combat effects
+</li>
+
+</ul>
+
+</article>
+
+
+<article class="update">
+
+<div class="update-version">
+COMING SOON
+</div>
+
+<h3>
+UNCHARTED WATERS
+</h3>
+
+<p>
+The world is growing. New locations and adventures are on
+the horizon.
+</p>
+
+<ul>
+
+<li>
+New islands
+</li>
+
+<li>
+New enemies
+</li>
+
+<li>
+New secrets
+</li>
+
+<li>
+New adventures
+</li>
+
+</ul>
+
+</article>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     WIKI
+========================= -->
+
+<section class="wiki" id="wiki">
+
+<div class="section-title">
+
+<span>
+KNOWLEDGE OF THE SEAS
+</span>
+
+<h2>
+ETERNAL TIDES WIKI
+</h2>
+
+</div>
+
+<div class="wiki-box">
+
+<div class="magnifying-glass">
+🔎
+</div>
+
+<h2>
+COMING SOON
+</h2>
+
+<p>
+
+The Eternal Tides Wiki is still being charted.
+
+Soon you'll be able to explore information about
+fighting styles, islands, abilities, ships, characters,
+items and much more.
+
+</p>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     TEAM
+========================= -->
+
+<section class="team" id="team">
+
+<div class="section-title">
+
+<span>
+THE CREW BEHIND THE VOYAGE
+</span>
+
+<h2>
+THE CREW
+</h2>
+
+<p>
+Meet the people helping bring ETERNAL TIDES to life.
+</p>
+
+</div>
+
+<div class="team-grid">
+
+<div class="member">
+
+<div class="avatar">
+⚓
+</div>
+
+<h3>
+@YourName
+</h3>
+
+<p>
+FOUNDER / LEAD DEVELOPER
+</p>
+
+</div>
+
+
+<div class="member">
+
+<div class="avatar">
+💻
+</div>
+
+<h3>
+@Developer
+</h3>
+
+<p>
+PROGRAMMER
+</p>
+
+</div>
+
+
+<div class="member">
+
+<div class="avatar">
+🏗️
+</div>
+
+<h3>
+@Builder
+</h3>
+
+<p>
+BUILDER
+</p>
+
+</div>
+
+
+<div class="member">
+
+<div class="avatar">
+✨
+</div>
+
+<h3>
+@VFXArtist
+</h3>
+
+<p>
+VFX ARTIST
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     APPLICATION
+========================= -->
+
+<section class="apply" id="apply">
+
+<div class="apply-box">
+
+<div class="section-title">
+
+<span>
+JOIN THE DEVELOPMENT TEAM
+</span>
+
+<h2>
+JOIN THE CREW
+</h2>
+
+<p>
+
+We're looking for talented people to help build
+ETERNAL TIDES.
+
+</p>
+
+</div>
+
+<div class="buttons">
+
+<a
+href="https://forms.gle/VzudkEarJk6CrJjS6"
+target="_blank"
+class="button primary"
+>
+APPLY NOW
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     COMMUNITY
+========================= -->
+
+<section class="community">
+
+<div class="section-title">
+
+<span>
+THE VOYAGE STARTS HERE
+</span>
+
+<h2>
+JOIN THE COMMUNITY
+</h2>
+
+<p>
+
+Follow the development of ETERNAL TIDES and be the first
+to hear about announcements, sneak peeks and updates.
+
+</p>
+
+</div>
+
+<div class="socials">
+
+<a
+href="https://discord.gg/dtDfnuKZr7"
+target="_blank"
+class="social"
+>
+DISCORD
+</a>
+
+<a
+href="https://www.youtube.com/@EternalTidesGAME"
+target="_blank"
+class="social"
+>
+YOUTUBE
+</a>
+
+</div>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+
+<div>
+
+<strong>
+ETERNAL TIDES
+</strong>
+
+</div>
+
+<div>
+
+© 2026 ETERNAL TIDES • THE SEA AWAITS
+
+</div>
+
+</footer>
 
 </body>
 </html>
