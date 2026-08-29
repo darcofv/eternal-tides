@@ -3,48 +3,978 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ETERNAL TIDES</title>
+
+    <title>ETERNAL TIDES | Official</title>
+    <meta name="description" content="ETERNAL TIDES — An upcoming pirate adventure on Roblox.">
 
     <style>
-        body {
+        * {
             margin: 0;
-            min-height: 100vh;
-            background: #050b14;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 50% 30%, rgba(8, 91, 125, 0.28), transparent 40%),
+                radial-gradient(circle at 10% 90%, rgba(0, 48, 72, 0.25), transparent 35%),
+                linear-gradient(135deg, #02060a, #071925 55%, #02060a);
+            color: #eee8d5;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        /* =========================
+           NAVBAR
+        ========================= */
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 5%;
+
+            background: rgba(2, 6, 10, 0.92);
+            backdrop-filter: blur(16px);
+
+            border-bottom: 1px solid rgba(229, 199, 123, 0.16);
+
+            z-index: 1000;
+        }
+
+        .logo {
             color: #e5c77b;
-            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: 900;
+            letter-spacing: 3px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #9ba9b7;
+            font-size: 10px;
+            font-weight: bold;
+            letter-spacing: 1.8px;
+            transition: 0.25s;
+        }
+
+        .nav-links a:hover {
+            color: #62d9ff;
+        }
+
+        .nav-button {
+            padding: 10px 17px;
+            border: 1px solid #e5c77b;
+            color: #e5c77b !important;
+            font-size: 10px !important;
+            letter-spacing: 1.5px;
+            transition: 0.25s;
+        }
+
+        .nav-button:hover {
+            background: #e5c77b;
+            color: #07101a !important;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
+
+        main {
+            min-height: 100vh;
+            width: 100%;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
+            position: relative;
+
+            padding: 110px 25px 60px;
+
+            overflow: hidden;
+        }
+
+        /* Ocean glow */
+
+        main::before {
+            content: "";
+            position: absolute;
+
+            width: 650px;
+            height: 650px;
+
+            border-radius: 50%;
+
+            background: rgba(0, 150, 210, 0.08);
+
+            filter: blur(100px);
+
+            pointer-events: none;
+        }
+
+        /* =========================
+           PIRATE DECOR
+        ========================= */
+
+        .compass {
+            position: absolute;
+
+            right: 7%;
+            top: 22%;
+
+            width: 190px;
+            height: 190px;
+
+            border: 1px solid rgba(229, 199, 123, 0.13);
+            border-radius: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            color: rgba(229, 199, 123, 0.12);
+
+            font-size: 82px;
+
+            transform: rotate(18deg);
+        }
+
+        .compass::before {
+            content: "";
+
+            position: absolute;
+
+            width: 140px;
+            height: 140px;
+
+            border: 1px solid rgba(229, 199, 123, 0.1);
+            border-radius: 50%;
+        }
+
+        .compass::after {
+            content: "N     E     S     W";
+
+            position: absolute;
+
+            width: 300px;
+
+            color: rgba(229, 199, 123, 0.08);
+
+            font-size: 9px;
+            letter-spacing: 12px;
+
+            transform: rotate(-18deg);
+        }
+
+        .rope {
+            position: absolute;
+
+            left: -40px;
+            bottom: 14%;
+
+            width: 280px;
+            height: 2px;
+
+            background: rgba(229, 199, 123, 0.13);
+
+            transform: rotate(-18deg);
+        }
+
+        .rope::before,
+        .rope::after {
+            content: "";
+            position: absolute;
+
+            width: 9px;
+            height: 9px;
+
+            border: 1px solid rgba(229, 199, 123, 0.15);
+            border-radius: 50%;
+
+            top: -4px;
+        }
+
+        .rope::before {
+            left: 30px;
+        }
+
+        .rope::after {
+            right: 30px;
+        }
+
+        /* =========================
+           CONTENT
+        ========================= */
+
+        .content {
+            width: 100%;
+            max-width: 1000px;
+
+            position: relative;
+
             text-align: center;
+
+            z-index: 5;
         }
 
-        h1 {
-            font-size: 70px;
-            letter-spacing: 10px;
-            margin: 0;
-        }
-
-        h2 {
-            color: white;
-            letter-spacing: 6px;
-            font-weight: normal;
-        }
-
-        p {
+        .eyebrow {
             color: #62d9ff;
+
+            font-size: 10px;
+            font-weight: bold;
+
+            letter-spacing: 6px;
+
+            margin-bottom: 20px;
+        }
+
+        .title {
+            color: #e5c77b;
+
+            font-size: clamp(55px, 10vw, 115px);
+
+            font-weight: 900;
+
+            letter-spacing: 10px;
+
+            line-height: 0.88;
+
+            text-shadow:
+                0 0 35px rgba(229, 199, 123, 0.12),
+                0 15px 45px rgba(0, 0, 0, 0.8);
+        }
+
+        .subtitle {
+            margin-top: 15px;
+
+            color: #f5f2e8;
+
+            font-size: clamp(18px, 3vw, 29px);
+
+            font-weight: 600;
+
+            letter-spacing: 9px;
+        }
+
+        .description {
+            max-width: 620px;
+
+            margin: 25px auto 0;
+
+            color: #8998a6;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
+
+        .status {
+            display: inline-flex;
+
+            align-items: center;
+            gap: 10px;
+
+            margin-top: 22px;
+
+            padding: 9px 17px;
+
+            background: rgba(255,255,255,0.025);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            color: #8795a2;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+        }
+
+        .status-dot {
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #e5b95e;
+
+            box-shadow: 0 0 12px rgba(229,185,94,0.7);
+        }
+
+        /* =========================
+           BUTTONS
+        ========================= */
+
+        .buttons {
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-top: 28px;
+        }
+
+        .button {
+            padding: 14px 25px;
+
+            border-radius: 3px;
+
+            font-size: 10px;
+
+            font-weight: 900;
+
+            letter-spacing: 1.5px;
+
+            transition: 0.25s;
+
+            cursor: pointer;
+        }
+
+        .primary {
+            background: #e5c77b;
+            color: #07101a;
+        }
+
+        .primary:hover {
+            transform: translateY(-3px);
+
+            box-shadow:
+                0 12px 35px rgba(229,199,123,0.2);
+        }
+
+        .secondary {
+            background: rgba(255,255,255,0.035);
+
+            border: 1px solid rgba(255,255,255,0.16);
+
+            color: #d8dee5;
+        }
+
+        .secondary:hover {
+            border-color: #62d9ff;
+
+            color: #62d9ff;
+
+            transform: translateY(-3px);
+        }
+
+        /* =========================
+           INFO CARDS
+        ========================= */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 12px;
+
+            max-width: 900px;
+
+            margin: 38px auto 0;
+        }
+
+        .card {
+            padding: 20px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(12,29,43,0.9),
+                    rgba(4,12,20,0.95)
+                );
+
+            border: 1px solid rgba(255,255,255,0.07);
+
+            text-align: left;
+
+            transition: 0.25s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+
+            border-color: rgba(98,217,255,0.3);
+        }
+
+        .card-icon {
+            font-size: 21px;
+            margin-bottom: 12px;
+        }
+
+        .card-label {
+            color: #62d9ff;
+
+            font-size: 9px;
+
+            letter-spacing: 2px;
+
+            margin-bottom: 7px;
+        }
+
+        .card h3 {
+            color: #e5c77b;
+
+            font-size: 15px;
+
+            margin-bottom: 6px;
+        }
+
+        .card p {
+            color: #687888;
+
+            font-size: 11px;
+
+            line-height: 1.55;
+        }
+
+        /* =========================
+           WIKI OVERLAY
+        ========================= */
+
+        .wiki-overlay {
+            position: fixed;
+
+            inset: 0;
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 25px;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(9,65,88,0.35),
+                    rgba(2,7,12,0.97)
+                );
+
+            backdrop-filter: blur(15px);
+
+            z-index: 2000;
+        }
+
+        .wiki-overlay.active {
+            display: flex;
+        }
+
+        .wiki-box {
+            width: min(480px, 100%);
+
+            padding: 55px 30px;
+
+            text-align: center;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    #0b1b28,
+                    #050d15
+                );
+
+            border: 1px solid rgba(229,199,123,0.2);
+
+            box-shadow:
+                0 30px 90px rgba(0,0,0,0.7);
+        }
+
+        .magnifying-glass {
+            font-size: 58px;
+
+            margin-bottom: 18px;
+
+            filter:
+                drop-shadow(
+                    0 0 15px rgba(98,217,255,0.3)
+                );
+        }
+
+        .wiki-box h2 {
+            color: #e5c77b;
+
+            font-size: 28px;
+
+            letter-spacing: 4px;
+        }
+
+        .wiki-box p {
+            color: #7e8d9b;
+
+            margin-top: 14px;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+        }
+
+        .close {
+            display: inline-block;
+
+            margin-top: 25px;
+
+            padding: 11px 22px;
+
+            border: 1px solid rgba(255,255,255,0.15);
+
+            color: #b8c1ca;
+
+            font-size: 10px;
+
+            letter-spacing: 2px;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .close:hover {
+            border-color: #62d9ff;
+
+            color: #62d9ff;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            position: fixed;
+
+            left: 0;
+            bottom: 16px;
+
+            width: 100%;
+
+            text-align: center;
+
+            color: #455462;
+
+            font-size: 9px;
+
+            letter-spacing: 1.5px;
+
+            z-index: 20;
+        }
+
+        footer strong {
+            color: #8d7846;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 800px) {
+
+            body {
+                overflow-y: auto;
+            }
+
+            main {
+                min-height: 100vh;
+
+                padding-top: 105px;
+                padding-bottom: 100px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .compass {
+                right: -70px;
+                top: 18%;
+                opacity: 0.45;
+            }
+
+            .rope {
+                opacity: 0.4;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+
+                max-width: 500px;
+            }
+
+            .card {
+                text-align: center;
+            }
+
+            footer {
+                position: relative;
+
+                bottom: auto;
+
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            nav {
+                height: 65px;
+            }
+
+            .logo {
+                font-size: 15px;
+                letter-spacing: 2px;
+            }
+
+            .nav-button {
+                padding: 9px 12px;
+            }
+
+            .title {
+                letter-spacing: 5px;
+            }
+
+            .subtitle {
+                letter-spacing: 5px;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+
+            .eyebrow {
+                letter-spacing: 4px;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .button {
+                width: min(260px, 100%);
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div>
-        <h1>ETERNAL TIDES</h1>
-        <h2>THE SEA AWAITS</h2>
-        <p>WEBSITE ONLINE</p>
+    <!-- =========================
+         NAVIGATION
+    ========================= -->
+
+    <nav>
+
+        <a href="#" class="logo">
+            ⚓ ETERNAL TIDES
+        </a>
+
+        <ul class="nav-links">
+            <li>
+                <a href="#home">HOME</a>
+            </li>
+
+            <li>
+                <a href="#crew">CREW</a>
+            </li>
+
+            <li>
+                <a href="#" onclick="openWiki(); return false;">
+                    WIKI
+                </a>
+            </li>
+
+            <li>
+                <a href="#apply">APPLY</a>
+            </li>
+        </ul>
+
+        <a
+            href="https://discord.gg/dtDfnuKZr7"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nav-button"
+        >
+            DISCORD
+        </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN WEBSITE
+    ========================= -->
+
+    <main id="home">
+
+        <!-- Pirate compass decoration -->
+
+        <div class="compass">
+            ✦
+        </div>
+
+        <div class="rope"></div>
+
+
+        <div class="content">
+
+            <div class="eyebrow">
+                THE NEXT ADVENTURE AWAITS
+            </div>
+
+            <div class="title">
+                ETERNAL
+            </div>
+
+            <div class="subtitle">
+                TIDES
+            </div>
+
+            <p class="description">
+                An upcoming open-world pirate adventure on Roblox.
+                Explore dangerous seas, discover mysterious islands,
+                master powerful fighting styles and forge your own legend.
+            </p>
+
+
+            <!-- Development status -->
+
+            <div class="status">
+
+                <div class="status-dot"></div>
+
+                CURRENTLY IN DEVELOPMENT
+
+            </div>
+
+
+            <!-- Main buttons -->
+
+            <div class="buttons">
+
+                <a
+                    href="https://discord.gg/dtDfnuKZr7"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button primary"
+                >
+                    JOIN THE CREW
+                </a>
+
+                <a
+                    href="https://forms.gle/VzudkEarJk6CrJjS6"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="button secondary"
+                >
+                    APPLY TO THE TEAM
+                </a>
+
+            </div>
+
+
+            <!-- Three feature cards -->
+
+            <div class="cards" id="crew">
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ⚔️
+                    </div>
+
+                    <div class="card-label">
+                        COMBAT
+                    </div>
+
+                    <h3>
+                        FIGHTING STYLES
+                    </h3>
+
+                    <p>
+                        Master unique fighting styles and become stronger
+                        as your journey across the seas continues.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        🏴‍☠️
+                    </div>
+
+                    <div class="card-label">
+                        ADVENTURE
+                    </div>
+
+                    <h3>
+                        THE OPEN SEA
+                    </h3>
+
+                    <p>
+                        Explore islands, uncover secrets and discover
+                        what waits beyond the horizon.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">
+                        ⚓
+                    </div>
+
+                    <div class="card-label">
+                        COMMUNITY
+                    </div>
+
+                    <h3>
+                        JOIN THE CREW
+                    </h3>
+
+                    <p>
+                        Follow development, meet the community and help
+                        shape the future of ETERNAL TIDES.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         WIKI POPUP
+    ========================= -->
+
+    <div
+        class="wiki-overlay"
+        id="wikiOverlay"
+        onclick="closeWikiOutside(event)"
+    >
+
+        <div class="wiki-box">
+
+            <div class="magnifying-glass">
+                🔎
+            </div>
+
+            <h2>
+                WIKI
+            </h2>
+
+            <p>
+                The ETERNAL TIDES Wiki is currently being created.
+                Come back soon to discover information about the world,
+                fighting styles, islands, characters and more.
+            </p>
+
+            <div
+                class="close"
+                onclick="closeWiki()"
+            >
+                CLOSE
+            </div>
+
+        </div>
+
     </div>
+
+
+    <!-- =========================
+         FOOTER
+    ========================= -->
+
+    <footer>
+
+        <strong>ETERNAL TIDES</strong>
+
+        &nbsp; • &nbsp;
+
+        AN UPCOMING ROBLOX ADVENTURE
+
+        &nbsp; • &nbsp;
+
+        <a
+            href="https://www.youtube.com/@EternalTidesGAME"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            YOUTUBE
+        </a>
+
+    </footer>
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================= -->
+
+    <script>
+
+        function openWiki() {
+            document
+                .getElementById("wikiOverlay")
+                .classList.add("active");
+        }
+
+        function closeWiki() {
+            document
+                .getElementById("wikiOverlay")
+                .classList.remove("active");
+        }
+
+        function closeWikiOutside(event) {
+
+            if (event.target.id === "wikiOverlay") {
+                closeWiki();
+            }
+
+        }
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+                closeWiki();
+            }
+
+        });
+
+    </script>
 
 </body>
 </html>
