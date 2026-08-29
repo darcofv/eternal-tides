@@ -209,7 +209,7 @@
             transform: translateY(-2px);
         }
 
-        /* --- Team Section --- */
+        /* --- Sections --- */
         section {
             width: 100%;
             margin-bottom: 6rem;
@@ -231,44 +231,6 @@
             max-width: 600px;
             margin: 0 auto 3rem auto;
             font-size: 1rem;
-        }
-
-        .crew-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            width: 100%;
-        }
-
-        .crew-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 2rem 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .crew-card:hover {
-            border-color: var(--border-color-hover);
-            background: var(--bg-card-hover);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .crew-role {
-            font-size: 0.75rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            color: var(--gold);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .crew-name {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--text-main);
         }
 
         /* --- Applications Section --- */
@@ -311,6 +273,45 @@
             font-size: 0.85rem;
             color: var(--text-muted);
             font-weight: 500;
+        }
+
+        /* --- Crew Grid (Bottom Credits) --- */
+        .crew-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .crew-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .crew-card:hover {
+            border-color: var(--border-color-hover);
+            background: var(--bg-card-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .crew-role {
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--gold);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .crew-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-main);
         }
 
         /* --- Wiki Modal Overlay --- */
@@ -401,7 +402,7 @@
         /* --- Responsive Design --- */
         @media (max-width: 768px) {
             .nav-links {
-                display: none; /* Keep simple for single-page layout or add mobile menu toggle if desired */
+                display: none;
             }
             .nav-container {
                 justify-content: center;
@@ -414,19 +415,21 @@
 </head>
 <body>
 
+    <!-- Top Navigation Bar -->
     <header>
         <div class="nav-container">
             <a href="#" class="logo">ETERNAL TIDES</a>
             <ul class="nav-links">
                 <li><a href="#">GAME</a></li>
                 <li><a id="wikiNavBtn">WIKI</a></li>
-                <li><a href="#team">TEAM</a></li>
                 <li><a href="#apply">APPLY</a></li>
+                <li><a href="#team">CREW</a></li>
                 <li><a href="https://discord.gg/dtDfnuKZr7" target="_blank" class="nav-discord">DISCORD</a></li>
             </ul>
         </div>
     </header>
 
+    <!-- Main Hero Section -->
     <main>
         <div class="status-badge">
             <span>🟡</span> In Development
@@ -439,35 +442,13 @@
             An upcoming open-world pirate adventure built around exploration, combat, progression, and the mysteries of the sea.
         </p>
 
+        <!-- Discord and YouTube Buttons at Top/Hero Area -->
         <div class="hero-buttons">
             <a href="https://discord.gg/dtDfnuKZr7" target="_blank" class="btn btn-primary">Join Discord</a>
             <a href="https://www.youtube.com/@EternalTidesGAME" target="_blank" class="btn btn-secondary">YouTube</a>
         </div>
 
-        <section id="team">
-            <h2 class="section-title">The Crew</h2>
-            <p class="section-desc">The dedicated minds shaping the world of Eternal Tides.</p>
-            
-            <div class="crew-grid">
-                <div class="crew-card">
-                    <div class="crew-role">Founder / Lead Dev</div>
-                    <div class="crew-name">@YourName</div>
-                </div>
-                <div class="crew-card">
-                    <div class="crew-role">Programmer</div>
-                    <div class="crew-name">@Developer</div>
-                </div>
-                <div class="crew-card">
-                    <div class="crew-role">Builder</div>
-                    <div class="crew-name">@Builder</div>
-                </div>
-                <div class="crew-card">
-                    <div class="crew-role">VFX Artist</div>
-                    <div class="crew-name">@VFXArtist</div>
-                </div>
-            </div>
-        </section>
-
+        <!-- Applications Section ("Join The Crew") -->
         <section id="apply">
             <div class="apply-box">
                 <h2 class="section-title">Join The Crew</h2>
@@ -489,8 +470,50 @@
                 <a href="https://forms.gle/VzudkEarJk6CrJjS6" target="_blank" class="btn btn-primary">Apply Now</a>
             </div>
         </section>
+
+        <!-- The Crew / Credits Section at Bottom -->
+        <section id="team">
+            <h2 class="section-title">The Crew Credits</h2>
+            <p class="section-desc">The key leadership and development departments behind Eternal Tides.</p>
+            
+            <div class="crew-grid">
+                <div class="crew-card">
+                    <div class="crew-role">Server Owner</div>
+                    <div class="crew-name">@IMU</div>
+                </div>
+                <div class="crew-card">
+                    <div class="crew-role">Co-Owner</div>
+                    <div class="crew-name">@FiveElders</div>
+                </div>
+                <div class="crew-card">
+                    <div class="crew-role">Executive Manager</div>
+                    <div class="crew-name">@SupremeCommander</div>
+                </div>
+                <div class="crew-card">
+                    <div class="crew-role">Development Director</div>
+                    <div class="crew-name">@ChiefShipwright</div>
+                </div>
+                <div class="crew-card">
+                    <div class="crew-role">Lead Developer</div>
+                    <div class="crew-name">@LeadDeveloper</div>
+                </div>
+                <div class="crew-card">
+                    <div class="crew-role">Head Administrator</div>
+                    <div class="crew-name">@WorldGovernment</div>
+                </div>
+                <div class="crew-card">
+                    <div class="crew-role">Head Moderator</div>
+                    <div class="crew-name">@FleetAdmiral</div>
+                </div>
+                <div class="crew-card">
+                    <div class="crew-role">Community Manager</div>
+                    <div class="crew-name">@Community</div>
+                </div>
+            </div>
+        </section>
     </main>
 
+    <!-- Wiki Modal Popup -->
     <div class="modal-overlay" id="wikiModal">
         <div class="modal-content">
             <div class="modal-icon">🔍</div>
@@ -503,11 +526,13 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
         <a href="#" class="logo" style="font-size: 1.1rem;">ETERNAL TIDES</a>
         <p>&copy; 2026 Eternal Tides. All rights reserved. Not affiliated with Roblox Corporation.</p>
     </footer>
 
+    <!-- JavaScript for Wiki Popup -->
     <script>
         const wikiNavBtn = document.getElementById('wikiNavBtn');
         const wikiModal = document.getElementById('wikiModal');
@@ -522,7 +547,6 @@
             wikiModal.classList.remove('active');
         });
 
-        // Close modal when clicking outside of the content box
         wikiModal.addEventListener('click', (e) => {
             if (e.target === wikiModal) {
                 wikiModal.classList.remove('active');
